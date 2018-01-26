@@ -109,9 +109,7 @@ class heap {
             return;
         }
         if(!list.isEmpty()){
-            if(list.getFirst() == min){
-                list.removeFirst();
-            }
+            list.removeFirst();
         }
         heap pre = min.prev;
         heap ne = min.next;
@@ -174,6 +172,7 @@ class heap {
         }
         heap t1 = x;
         heap t2 = (t1.child != null) ? t1.child : null;
+        if(x != min){
         heap pre = x.prev;
         heap ne = x.next;
         if(pre == null && ne != null){
@@ -205,6 +204,7 @@ class heap {
             if(t1.parent.data > k){
                 cut(t1.parent);
             }
+        }
         }
         t1.data = k;
         if(t2 != null){
@@ -588,25 +588,25 @@ public class Fibonacci {
 //        k.insert(-1);
 //        k.insert(-2);
 //        k.removeMin();
-////        System.out.println("---l");
+//////        System.out.println("---l");
 //        k.decreaseKey(-4);
 //        k.removeMin();
-////        System.out.println("---l");
-//        k.removeMin();
-//        k.removeMin();
-//        k.removeMin();
-//        k.removeMin();
-//        k.removeMin();
-////        System.out.print("---k");
-////        k.print();
-//        k.removeMin();
-//        k.removeMin();
-//        k.removeMin();
-//        k.removeMin();
+//////        System.out.println("---l");
 //        k.removeMin();
 //        k.removeMin();
 ////        k.removeMin();
-//        System.out.println("-----");
+////        k.removeMin();
+////        k.removeMin();
+//////        System.out.print("---k");
+//////        k.print();
+////        k.removeMin();
+////        k.removeMin();
+////        k.removeMin();
+////        k.removeMin();
+////        k.removeMin();
+////        k.removeMin();
+//////        k.removeMin();
+////        System.out.println("-----");
 //        k.print();
 //        if(k.min != null && k.min.child != null){
 //                System.out.print(k.min.child.data+"QA");
@@ -618,35 +618,35 @@ public class Fibonacci {
 //        }
 //        System.out.print(k.getMin()+"min");
 //        System.out.println("-----AA");
-        boolean flag = false;
-        int count = 0;
-        int n = 4;
-        while(k.size > 0){
-            if(count == 2 && !flag){
-                k.insert(1);
-                k.insert(2);
-                k.insert(15);
-                k.insert(16);
-                flag = true;
-                k.print();
-            } else {
-                k.removeMin();
-            }
-            System.out.println("----------------p");
-            k.print();
-            System.out.println("------");
-            if(k.min != null && k.min.child != null){
-                System.out.print(k.min.child.data+"CH");
-                heap l = k.min.child.left;
-                while(l != null){
-                    System.out.print(l.data+"CH ele");
-                    l = l.next;
-                }
-            }
-            System.out.print("MIN"+k.getMin()+" ");
-            System.out.println("------finished----");
-            count++;
-       }
+//        boolean flag = false;
+//        int count = 0;
+//        int n = 4;
+//        while(k.size > 0){
+//            if(count == 2 && !flag){
+//                k.insert(1);
+//                k.insert(2);
+//                k.insert(15);
+//                k.insert(16);
+//                flag = true;
+//                k.print();
+//            } else {
+//                k.removeMin();
+//            }
+//            System.out.println("----------------p");
+//            k.print();
+//            System.out.println("------");
+//            if(k.min != null && k.min.child != null){
+//                System.out.print(k.min.child.data+"CH");
+//                heap l = k.min.child.left;
+//                while(l != null){
+//                    System.out.print(l.data+"CH ele");
+//                    l = l.next;
+//                }
+//            }
+//            System.out.print("MIN"+k.getMin()+" ");
+//            System.out.println("------finished----");
+//            count++;
+//       }
     }
     
 }
