@@ -140,8 +140,6 @@ class heap {
                     k1.left.right.next = ne;
                 }
             }
-            print();
-            System.out.println("----");
             min = k1;
             k1.left = k1;
             k1.left.right = k1;
@@ -162,12 +160,11 @@ class heap {
          }
          min = k;   
         }
-        print();
-        size--;
-        if(size == X){
+        if(size == X/2){
             X /= 2;
             maxDegree--;
         }
+        size--;
         consolidate();
     }
     
@@ -373,6 +370,7 @@ class heap {
                         y.prev = z;
                     }
                 } else {
+                    y.parent = min;
                     if(y.degree == 1 && min.degree == 1){
                          min.child.prev = y;
                          y.next = min.child;
