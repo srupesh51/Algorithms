@@ -1,4 +1,4 @@
-public class MyClass {
+public class quickSortThreeWay {
 
     private static void quickSort(int arr[], int l, int h){
         if(l < h){
@@ -12,13 +12,10 @@ public class MyClass {
         int i = l;
         int j = h;
         while(i < j){
-            while(i < j && arr[i] <= arr[j]){
-                i++;
-            }
-
-            if(i < j){
+            if(arr[i] > arr[j]){
                 swap(arr,i,j);
             }
+            i++;
         }
         return j;
     }
@@ -30,9 +27,9 @@ public class MyClass {
     }
 
     public static void main(String args[]) {
-        int arr[] = {10, 7, 8, 9, 1, 5, 7};
-        quickSort(arr, 0, arr.length-1);
-        for(int i = 0; i < arr.length; i++){
+        int arr[] = {4, 9, 4, 4, 1, 9, 4, 4, 9, 4, 4, 1, 4};
+        quickSort(arr,0,arr.length-1);
+        for(int i = 0; i < arr.length;i++){
             System.out.print(arr[i]+" ");
         }
     }
