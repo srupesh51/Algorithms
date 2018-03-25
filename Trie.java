@@ -6,7 +6,6 @@ public class Trie {
         // isEndOfWord is true if the node represents
         // end of a word
         boolean isEndOfWord;
-
         TrieNode(){
             isEndOfWord = false;
             for (int i = 0; i < 26; i++)
@@ -19,7 +18,7 @@ public class Trie {
     }
     private static void insert(TrieNode root, String word[]){
         for(int i = 0; i < word.length; i++){
-            insert(root, word[i], 0, word[i].length());
+            insert(root, word[i],0, word[i].length());
         }
     }
     private static void insert(TrieNode root, String word, int start, int end){
@@ -49,11 +48,45 @@ public class Trie {
         return isPresent(root, word,start+1,end);
     }
 
+    private static void deleteWord(TrieNode root, String word[]){
+      for(int i = 0; i < word.length; i++){
+          delete(root, word[i], 0, word[i].length());
+      }
+    }
+    private static boolean isFree(TrieNode root){
+      for (int i = 0; i < 26; i++)
+      {
+        if(root.children[i] != null){
+           return false;
+        }
+      }
+      return true;
+    }
+    private static boolean delete(TrieNode root, String word, int start, int len){
+      if(start == len){
+        if(root.isEndOfWord){
+            root.isEndOfWord = false;
+            if(isFree(root)){
+              return true;
+            }
+        }
+        return false;
+      }
+      int cIndex = charToIndex(word.charAt(start));
+      if(delete(root.children[cIndex],word,start+1,len)){
+        root.children[cIndex] = null;
+        return !root.isEndOfWord && isFree(root);
+      }
+      return false;
+    }
+
 
     public static void main(String args[]) {
-        String word[] = {"apple","orange","grapes"};
+        String word[] = {"apple","amazon","grapes"};
         root = new TrieNode();
         insert(root,word);
-        System.out.print(isPresent(root,"orange")+" ");
+        String wordsToBeDeleted[] = {"amazon","grapes"};
+        deleteWord(root, wordsToBeDeleted);
+        System.out.print(isPresent(root,"grapes")+" ");
     }
 }
