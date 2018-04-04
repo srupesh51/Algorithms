@@ -4,6 +4,8 @@ static class Heap {
  int arr[];
  int size;
  int capacity;
+ int i;
+ int j;
  Heap(){}
  Heap(int sz){
    this.capacity = sz;
@@ -86,6 +88,50 @@ private static void minHeapify(Heap h, int i){
   }
 }
 
+private static void mergeHeaps(int a[], int b[]){
+  int result[] = new int[a.length + b.length];
+  int i ;
+  for(i = 0; i < a.length; i++){
+    result[i] = a[i];
+  }
+  for(int i1 = i, j = 0; i1 < a.length + b.length; i1++, j++){
+    result[i1] = b[j];
+  }
+  buildMaxHeap(result, result.length);
+
+  for(int j = 0; j < result.length; j++){
+    System.out.print(result[j]+" ");
+  }
+}
+private static void maxHeapify(int arr[], int n, int i){
+  int largest = i;
+  int left = getLeft(i);
+  int right = getRight(i);
+  if(left < n && arr[left] > arr[i]){
+    largest = left;
+  }
+  if(right < n && arr[right] > arr[largest]){
+    largest = right;
+  }
+
+  if(largest != i){
+    swap(i, arr, largest);
+    maxHeapify(arr, n, largest);
+  }
+}
+
+private static void swap(int i, int arr[], int j){
+  int tmp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = tmp;
+}
+
+private static void buildMaxHeap(int res[], int n){
+  for(int i = (n - 1)/2; i>= 0 ; i--){
+    maxHeapify(res, n, i);
+  }
+}
+
  public static void main(String args[]){
    Heap h = new Heap(4);
    insert(h, 1);
@@ -98,6 +144,10 @@ private static void minHeapify(Heap h, int i){
    min = extractMin(h);
    min = extractMin(h);
    System.out.print(min+" ");
+   int A[] = {10,5,6,2};
+   int B[] = {12,7,9};
+   mergeHeaps(A, B);
+
  }
 
 }
