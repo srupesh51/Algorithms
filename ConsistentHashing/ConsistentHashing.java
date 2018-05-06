@@ -108,23 +108,36 @@ class LoadBalancer {
     System.out.println();
   }
   public void balanceLoads(){
-    DLL t2 = null;
     for(int i = map.size(); i > 0; i--){
       LinkedList<Request> t = map.get(i);
       if(Machines == null){
         Machines = new DLL(t);
-        t2 = Machines;
+        Machines.prev = Machines;
+        Machines.next = Machines;
       } else {
         DLL m2 = new DLL(t);
         DLL t1 = Machines;
+        DLL t2 = t1.prev;
         m2.next = t1;
         t1.prev = m2;
+        m2.prev = t2;
+        t2.next = m2;
         Machines = m2;
       }
     }
   }
   public void printLoadDistribution(){
     DLL m3 = Machines;
+    DLL m4 = m3.prev;
+    DLL m5 = m3.prev.next;
+    LinkedList<Request> t1 = m4.r;
+    for(int i = 0; i < t1.size(); i++){
+      System.out.print(t1.get(i).requestId+" ");
+    }
+    LinkedList<Request> t2 = m5.r;
+    for(int i = 0; i < t2.size(); i++){
+      System.out.print(t2.get(i).requestId+" ");
+    }
     int count = 1;
     while(m3 != null){
       LinkedList<Request> t = m3.r;
@@ -143,7 +156,7 @@ class LoadBalancer {
 }
 public class ConsistentHashing {
   public static void main(String args[]){
-    LoadBalancer b1 = new LoadBalancer(6,4);
+    LoadBalancer b1 = new LoadBalancer(6,3);
     Request r[] = {new Request(1), new Request(3), new Request(2),
     new Request(4), new Request(6), new Request(5)};
     for(int i = 0; i < r.length; i++){
